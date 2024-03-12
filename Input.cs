@@ -29,14 +29,14 @@
         InputMapping["Left"] = new KeyList(ConsoleKey.A, ConsoleKey.LeftArrow);
         InputMapping["Right"] = new KeyList(ConsoleKey.D, ConsoleKey.RightArrow);
         InputMapping["Quit"] = new KeyList(ConsoleKey.Escape, ConsoleKey.None);
-        //InputMapping["Up"][0] = ConsoleKey.W;
-        //InputMapping["Up"][1] = ConsoleKey.UpArrow;
-        //InputMapping["Down"][0] = ConsoleKey.S;
-        //InputMapping["Down"][1] = ConsoleKey.DownArrow;
-        //InputMapping["Left"][0] = ConsoleKey.A;
-        //InputMapping["Left"][1] = ConsoleKey.LeftArrow;
-        //InputMapping["Right"][0] = ConsoleKey.D;
-        //InputMapping["Right"][1] = ConsoleKey.RightArrow;
+        /*InputMapping["Up"][0] = ConsoleKey.W;
+        InputMapping["Up"][1] = ConsoleKey.UpArrow;
+        InputMapping["Down"][0] = ConsoleKey.S;
+        InputMapping["Down"][1] = ConsoleKey.DownArrow;
+        InputMapping["Left"][0] = ConsoleKey.A;
+        InputMapping["Left"][1] = ConsoleKey.LeftArrow;
+        InputMapping["Right"][0] = ConsoleKey.D;
+        InputMapping["Right"][1] = ConsoleKey.RightArrow;*/
     }
     public static Dictionary<string, KeyList> InputMapping = new Dictionary<string, KeyList>();
     //public static Dictionary<string, ConsoleKey[]> InputMapping = new Dictionary<string, ConsoleKey[]>();
@@ -50,7 +50,8 @@
 
     public static bool GetButton(string buttonName)
     {
-        //bool a = (InputMapping[buttonName][0] == keyInfo.Key || InputMapping[buttonName][0] == keyInfo.Key);
+        /*bool a = (InputMapping[buttonName][0] == keyInfo.Key || InputMapping[buttonName][1] == keyInfo.Key);
+        return a;*/
         return (InputMapping[buttonName].button == keyInfo.Key || InputMapping[buttonName].altButton == keyInfo.Key);
     }
 }
