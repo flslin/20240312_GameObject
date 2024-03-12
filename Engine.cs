@@ -16,9 +16,11 @@ class Engine
     public bool isRunning;
     public ConsoleKeyInfo keyInfo;
 
+    public Player player = new Player();
+
     public void Init()
     {
-        
+        Input.Init();
     }
 
     public void LoadScene(string SceneName)
@@ -73,6 +75,7 @@ class Engine
             }
         }
         //Load();
+
     }
 
     public void Run()
@@ -109,7 +112,10 @@ class Engine
 
     protected void Update()
     {
-
+        foreach (GameObject gameObject in gameObjects)
+        {
+            gameObject.Update();
+        }
     }
 
     protected void Render()

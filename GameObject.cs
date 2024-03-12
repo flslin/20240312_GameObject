@@ -3,7 +3,7 @@ class GameObject
 {
     public int x;
     public int y;
-    
+
     public GameObject()
     {
         x = 0;

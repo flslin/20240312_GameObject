@@ -31,7 +31,7 @@ class Floor : GameObject
 
     public override void Render()
     {
-        base.Render();
+        //base.Render();
     }
 
 }
