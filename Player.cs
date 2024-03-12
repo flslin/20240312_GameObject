@@ -42,6 +42,11 @@
         {
             x++;
         }
+        if (Input.GetButton("Quit"))
+        {
+            // singleton pattern : 오브젝트가 엔진꺼 써야할 필요가 있을 때 씀
+            // engine.Stop();
+        }
 
         x = Math.Clamp(x, 0, 80);
         y = Math.Clamp(y, 0, 80);
