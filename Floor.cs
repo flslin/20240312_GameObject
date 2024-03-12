@@ -3,7 +3,15 @@ class Floor : GameObject
 {
     public Floor()
     {
+        shape = ' ';
+    }
 
+    public Floor(int newX, int newY) // 생성자 오버로드
+    {
+        shape = ' ';
+
+        x = newX;
+        y = newY;
     }
 
     ~Floor()
@@ -23,7 +31,7 @@ class Floor : GameObject
 
     public override void Render()
     {
-
+        base.Render();
     }
 
 }

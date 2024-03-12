@@ -3,7 +3,14 @@ class Monster : GameObject
 {
     public Monster()
     {
+        shape = 'M';
+    }
+    public Monster(int newX, int newY) // 생성자 오버로드
+    {
+        shape = 'M';
 
+        x = newX;
+        y = newY;
     }
 
     ~Monster()
@@ -23,7 +30,7 @@ class Monster : GameObject
 
     public override void Render()
     {
-
+        base.Render();
     }
 
 }

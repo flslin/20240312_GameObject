@@ -1,9 +1,17 @@
 ﻿
 class Wall : GameObject
 {
-    public Wall()
+    //public Wall() // default 생성자. 생성자는 상속이 안됨
+    //{
+    //    shape = '*';
+    //}
+
+    public Wall(int newX = 0, int newY = 0) // 생성자 오버로드, = 0 -> default parameter
     {
-        
+        shape = '*';
+
+        x = newX;
+        y = newY;
     }
 
     ~Wall()
@@ -23,7 +31,7 @@ class Wall : GameObject
 
     public override void Render()
     {
-
+        base.Render();
     }
 
 }

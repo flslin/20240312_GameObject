@@ -3,7 +3,14 @@ class Goal : GameObject
 {
     public Goal()
     {
-        
+        shape = 'G';
+    }
+    public Goal(int newX, int newY) // 생성자 오버로드
+    {
+        shape = 'G';
+
+        x = newX;
+        y = newY;
     }
 
     ~Goal()
@@ -23,7 +30,7 @@ class Goal : GameObject
 
     public override void Render()
     {
-
+        base.Render();
     }
 
 }

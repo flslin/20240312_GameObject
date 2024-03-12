@@ -4,6 +4,13 @@
     {
         shape = 'P';
     }
+    public Player(int newX, int newY) // 생성자 오버로드
+    {
+        shape = 'P';
+
+        x = newX;
+        y = newY;
+    }
 
     ~Player()
     {
@@ -20,10 +27,9 @@
 
     }
 
-    public override void Render()
-    {
-
-    }
+    //public override void Render()
+    //{
+    //    base.Render();
+    //}
 
 }
-

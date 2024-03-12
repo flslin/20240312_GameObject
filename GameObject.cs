@@ -27,10 +27,10 @@ class GameObject
 
     public virtual void Render()
     {
-
+        Console.SetCursorPosition(x, y);
+        Console.Write(shape);
     }
 
     public char shape;
 
 }
-
