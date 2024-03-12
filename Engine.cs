@@ -14,6 +14,7 @@ class Engine
 
     public List<GameObject> gameObjects;
     public bool isRunning;
+    public ConsoleKeyInfo keyInfo;
 
     public void Init()
     {
@@ -22,10 +23,13 @@ class Engine
 
     public void LoadScene(string SceneName)
     {
+#if DEBUG
         string dir = System.IO.Directory.GetParent(System.Environment.CurrentDirectory).Parent.Parent.FullName; // Environment.CurrentDirectory: 현재 디렉토리 .parent.parent == 메인디렉토리
-
         string[] map = File.ReadAllLines(dir + "./data/" + SceneName);
-        //string[] map = File.ReadAllLines(dir + "./data/level01.map");
+#else
+        string dir = System.IO.Directory.GetParent(System.Environment.CurrentDirectory).Parent.Parent.FullName;
+        string[] map = File.ReadAllLines(dir + "./data/level01.map");
+#endif
 
         //string[] map = new string[10];
         //// file로 읽어옴.
@@ -75,7 +79,7 @@ class Engine
     {
         while (isRunning)
         {
-            Input();
+            ProcessInput();
             Update();
             Render();
         } // 1frame
@@ -98,9 +102,9 @@ class Engine
         return newgameObject;
     }
 
-    protected void Input()
+    protected void ProcessInput()
     {
-        Console.ReadKey();
+        Input.keyInfo = Console.ReadKey();
     }
 
     protected void Update()
