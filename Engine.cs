@@ -1,7 +1,7 @@
 ﻿
 class Engine
 {
-    public Engine()
+    protected Engine()
     {
         gameObjects = new List<GameObject>();
         isRunning = true;
@@ -11,16 +11,33 @@ class Engine
     {
 
     }
+    private static Engine? instance;
+
+    public static Engine GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Engine();
+        }
+        return instance;
+        //return instance == null ? (instance = new Engine()) : instance; // null일 경우 new 아닐경우 instance 리턴;
+        //return instance ?? (instance = new Engine()); // 을 줄인 코드
+    }
 
     public List<GameObject> gameObjects;
     public bool isRunning;
     public ConsoleKeyInfo keyInfo;
 
-    public Player player = new Player();
+    //public Player player = new Player();
 
     public void Init()
     {
         Input.Init();
+    }
+
+    public void Stop()
+    {
+        isRunning = false;
     }
 
     public void LoadScene(string SceneName)
@@ -52,30 +69,80 @@ class Engine
             {
                 if (map[y][x] == '*')
                 {
-                    Instantiate(new Wall(x, y));
+                    GameObject newGameObject = Instantiate(new GameObject());
+                    newGameObject.name = "Wall";
+                    newGameObject.transform.x = x;
+                    newGameObject.transform.y = y;
+                    newGameObject.AddComponent<SpriteRenderer>();
+                    newGameObject.GetComponent<SpriteRenderer>().shape = '*';
+
+                    //Instantiate(new Wall(x, y));
+                    //Instantiate(new Floor(x, y)); // 2024.03.18 변경
+
                     //newGameObject.x = x; // 생성자 오버로드를 사용하면 필요없음
                     //newGameObject.y = y;
                 }
                 else if (map[y][x] == ' ')
                 {
-                    Instantiate(new Floor(x, y));
+                    GameObject newGameObject = Instantiate(new GameObject());
+                    newGameObject.name = "Floor";
+                    newGameObject.transform.x = x;
+                    newGameObject.transform.y = y;
+                    newGameObject.AddComponent<SpriteRenderer>();
+                    newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
+                    //Instantiate(new Floor(x, y));
                 }
                 else if (map[y][x] == 'P')
                 {
-                    Instantiate(new Player(x, y));
+                    GameObject newGameObject = Instantiate(new GameObject());
+                    newGameObject.name = "Player";
+                    newGameObject.transform.x = 1;
+                    newGameObject.transform.y = 1;
+                    newGameObject.AddComponent<SpriteRenderer>();
+                    newGameObject.GetComponent<SpriteRenderer>().shape = 'P';
+
                 }
                 else if (map[y][x] == 'G')
                 {
-                    Instantiate(new Goal(x, y));
+                    GameObject newGameObject = Instantiate(new GameObject());
+                    newGameObject.name = "Goal";
+                    newGameObject.transform.x = x;
+                    newGameObject.transform.y = y;
+                    newGameObject.AddComponent<SpriteRenderer>();
+                    newGameObject.GetComponent<SpriteRenderer>().shape = 'G';
+
+                    //Instantiate(new Goal(x, y));
+                    //Instantiate(new Floor(x, y));
+
                 }
                 else if (map[y][x] == 'M')
                 {
-                    Instantiate(new Monster(x, y));
+                    GameObject newGameObject = Instantiate(new GameObject());
+                    newGameObject.name = "Monster";
+                    newGameObject.transform.x = x;
+                    newGameObject.transform.y = y;
+                    newGameObject.AddComponent<SpriteRenderer>();
+                    newGameObject.GetComponent<SpriteRenderer>().shape = 'M';
+
+                    //Instantiate(new Monster(x, y));
+                    //Instantiate(new Floor(x, y));
+
                 }
             }
         }
         //Load();
+        //    gameObjects.Sort();
 
+        //    int WCount = 0;
+        //    foreach (GameObject obj in gameObjects)
+        //    {
+        //        // reflection 부모, 자식 클래스가 뭔지 모를 떄 실행 중 확인 가능
+        //        if (obj.GetType() == typeof(Wall))
+        //        {
+        //            WCount++;
+        //        }
+        //        Console.WriteLine(WCount);
+        //    }
     }
 
     public void Run()
@@ -114,8 +181,16 @@ class Engine
     {
         foreach (GameObject gameObject in gameObjects)
         {
-            gameObject.Update();
+            foreach(Component component in gameObject.components)
+            {
+                component.Update(); // 컴포넌트 중 어떤 업데이트가 먼저 실행되는지 알 수 없음
+            }
         }
+
+        //foreach (GameObject gameObject in gameObjects)
+        //{
+        //    gameObject.Update();
+        //}
     }
 
     protected void Render()
@@ -128,7 +203,11 @@ class Engine
         Console.Clear();
         foreach (GameObject gameObject in gameObjects)
         {
-            gameObject.Render();
+            Renderer? renderer = gameObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.Render();
+            }
         }
     }
 }
