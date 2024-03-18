@@ -1,8 +1,6 @@
 ﻿
 class PlayerController : Component
 {
-    Engine engine;
-
     public override void Start() // 자식이 재정의 할수도 있음을 표시
     {
 
@@ -10,26 +8,30 @@ class PlayerController : Component
 
     public override void Update()
     {
+        if (transform == null)
+        {
+            return;
+        }
         if (Input.GetButton("Up"))
         {
-            transform.y--;
+            transform.Translate(0, -1);
         }
         if (Input.GetButton("Left"))
         {
-            transform.x--;
+            transform.Translate(-1, 0);
         }
         if (Input.GetButton("Down"))
         {
-            transform.y++;
+            transform.Translate(0, 1);
         }
         if (Input.GetButton("Right"))
         {
-            transform.x++;
+            transform.Translate(1, 0);
         }
         if (Input.GetButton("Quit"))
         {
             // singleton pattern : 오브젝트가 엔진꺼 써야할 필요가 있을 때 씀
-            engine.Stop();
+            Engine.GetInstance().Stop();
         }
 
         transform.x = Math.Clamp(transform.x, 0, 80);

@@ -89,7 +89,7 @@ class Engine
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
                     newGameObject.AddComponent<SpriteRenderer>();
-                    newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
+                    //newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
                     //Instantiate(new Floor(x, y));
                 }
                 else if (map[y][x] == 'P')
@@ -100,6 +100,7 @@ class Engine
                     newGameObject.transform.y = 1;
                     newGameObject.AddComponent<SpriteRenderer>();
                     newGameObject.GetComponent<SpriteRenderer>().shape = 'P';
+                    newGameObject.AddComponent<PlayerController>();
 
                 }
                 else if (map[y][x] == 'G')
@@ -130,6 +131,7 @@ class Engine
                 }
             }
         }
+
         //Load();
         //    gameObjects.Sort();
 
@@ -143,6 +145,8 @@ class Engine
         //        }
         //        Console.WriteLine(WCount);
         //    }
+
+
     }
 
     public void Run()
@@ -181,7 +185,7 @@ class Engine
     {
         foreach (GameObject gameObject in gameObjects)
         {
-            foreach(Component component in gameObject.components)
+            foreach (Component component in gameObject.components)
             {
                 component.Update(); // 컴포넌트 중 어떤 업데이트가 먼저 실행되는지 알 수 없음
             }

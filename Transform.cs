@@ -21,8 +21,8 @@
 
     public void Translate(int xOffset, int yOffset)
     {
-        x = xOffset;
-        y = yOffset;
+        x += xOffset;
+        y += yOffset;
 
     }
 }
