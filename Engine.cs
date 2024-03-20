@@ -77,11 +77,12 @@ class Engine
         //map[9] = "**********";
 
 
+        GameObject newGameObject;
+
         for (int y = 0; y < 10/*map.Length*/; ++y)
         {
             for (int x = 0; x < 10/*map[y].Length*/; ++x)
             {
-                GameObject newGameObject;
                 if (map[y][x] == '*')
                 {
                     newGameObject = Instantiate<GameObject>();
@@ -98,7 +99,6 @@ class Engine
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.renderOrder = RenderOrder.Floor;
 
@@ -114,8 +114,8 @@ class Engine
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = ' ';
                     renderer.renderOrder = RenderOrder.Floor;
 
                     //newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
@@ -125,21 +125,21 @@ class Engine
                 {
                     newGameObject = Instantiate<GameObject>();
                     newGameObject.name = "Player";
-                    newGameObject.transform.x = 1;
-                    newGameObject.transform.y = 1;
-                    newGameObject.AddComponent<SpriteRenderer>();
-                    newGameObject.GetComponent<SpriteRenderer>().shape = 'P';
-                    newGameObject.AddComponent<PlayerController>();
+                    newGameObject.transform.x = x;
+                    newGameObject.transform.y = y;
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = 'P';
                     renderer.renderOrder = RenderOrder.Player;
-                    newGameObject.AddComponent<Collider2D>();
+                    newGameObject.AddComponent<PlayerController>();
+                    Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
+                    collider2D.isTrigger = true;
 
                     newGameObject = Instantiate<GameObject>();
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = ' ';
                     renderer.renderOrder = RenderOrder.Floor;
                 }
                 else if (map[y][x] == 'G')
@@ -148,10 +148,9 @@ class Engine
                     newGameObject.name = "Goal";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
-                    newGameObject.GetComponent<SpriteRenderer>().shape = 'G';
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.renderOrder = RenderOrder.Goal;
+                    renderer.shape = 'G';
                     Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
                     collider2D.isTrigger = true;
 
@@ -159,8 +158,8 @@ class Engine
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = ' ';
                     renderer.renderOrder = RenderOrder.Floor;
 
                 }
@@ -170,28 +169,29 @@ class Engine
                     newGameObject.name = "Monster";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
-                    newGameObject.GetComponent<SpriteRenderer>().shape = 'M';
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
-                    renderer.renderOrder = RenderOrder.Wall;
+                    renderer.renderOrder = RenderOrder.Monster;
+                    renderer.shape = 'M';
                     Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
                     collider2D.isTrigger = true;
-                    
+                    newGameObject.AddComponent<AIController>();
+
                     newGameObject = Instantiate<GameObject>();
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
-                    newGameObject.AddComponent<SpriteRenderer>();
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = ' ';
                     renderer.renderOrder = RenderOrder.Floor;
+
 
                 }
             }
         }
 
-        GameObject GameObject = Instantiate<GameObject>();
-        GameObject.name = "GameManager";
-        GameObject.AddComponent<GameManager>();
+        newGameObject = Instantiate<GameObject>();
+        newGameObject.name = "GameManager";
+        newGameObject.AddComponent<GameManager>();
 
         RenderSort();
     }

@@ -20,9 +20,11 @@ class SpriteRenderer : Renderer
 
     public override void Render()
     {
-        Console.SetCursorPosition(transform.x, transform.y);
-        Console.Write(shape);
-
+        if (transform != null)
+        {
+            Console.SetCursorPosition(transform.x, transform.y);
+            Console.Write(shape);
+        }
     }
 }
 
