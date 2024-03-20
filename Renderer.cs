@@ -1,5 +1,6 @@
 ﻿class Renderer : Component
 {
+
     public Renderer()
     {
 

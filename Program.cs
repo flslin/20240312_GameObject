@@ -53,6 +53,26 @@ class Program
 
     static void Main(string[] args)
     {
+        /*int[] num = { 10, 7, 3, 4, 2, 6, 8, 1, 9, 5 };
+
+        for (int i = 0; i < num.Length; i++) // 선택 정렬
+        {
+            for (int j = i + 1; j < num.Length; j++)
+            {
+                if (num[i] > num[j])
+                {
+                    int temp = num[i];
+                    num[i] = num[j];
+                    num[j] = temp;
+                }
+            }
+        }
+
+        foreach(var i in num)
+        {
+            Console.WriteLine(i);
+        } */
+
         //Singleton.GetInstance().Draw(); // 의존성이 좋지 않음
         Engine engine = Engine.GetInstance();
 
@@ -60,11 +80,6 @@ class Program
         engine.LoadScene("level01.map");
         engine.Run();
         engine.Term();
-
-        //engine.Init();
-        //engine.LoadScene("level01.map");
-        //engine.Run();
-        //engine.Term();
 
         //List<Parent> list = new List<Parent>();
         //list.Add(new Child1());
@@ -92,64 +107,64 @@ class Program
         //}
     }
 
-        //GetConstructors()
-        //GetFields()
-        //GetInterfaces()
-        //GetMembers()
-        //GetMethods()
-        //GetProperties()
+    //GetConstructors()
+    //GetFields()
+    //GetInterfaces()
+    //GetMembers()
+    //GetMethods()
+    //GetProperties()
 
-        //int c = new int();
-        //Type t = c.GetType(); // 타입알아보기
+    //int c = new int();
+    //Type t = c.GetType(); // 타입알아보기
 
-        //ConstructorInfo[] datas = t.GetConstructors();
+    //ConstructorInfo[] datas = t.GetConstructors();
 
-        //foreach (ConstructorInfo d in datas)
-        //{
-        //    ParameterInfo[] ps = d.GetParameters();
-        //    foreach (ParameterInfo p in ps)
-        //    {
-        //        Console.WriteLine(p.Name);
-        //    }
-        //}
+    //foreach (ConstructorInfo d in datas)
+    //{
+    //    ParameterInfo[] ps = d.GetParameters();
+    //    foreach (ParameterInfo p in ps)
+    //    {
+    //        Console.WriteLine(p.Name);
+    //    }
+    //}
 
-        //Parent parent = new Child1();
+    //Parent parent = new Child1();
 
-        //Console.WriteLine(t.GetType());
-        //if (parent is Parent) // 상속관계 물어보는 참이면 True
-        //{
-        //    Console.WriteLine("T");
-        //}
-        //else
-        //{
-        //    Console.WriteLine("F");
-        //}
+    //Console.WriteLine(t.GetType());
+    //if (parent is Parent) // 상속관계 물어보는 참이면 True
+    //{
+    //    Console.WriteLine("T");
+    //}
+    //else
+    //{
+    //    Console.WriteLine("F");
+    //}
 
 
-        //Data d1 = new Data(1, 2);
-        //Data d2 = new Data(3, 4);
-        //List<Data> datas = new List<Data>();
+    //Data d1 = new Data(1, 2);
+    //Data d2 = new Data(3, 4);
+    //List<Data> datas = new List<Data>();
 
-        //Random random = new Random();
+    //Random random = new Random();
 
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    datas.Add(new Data(random.Next(0,101), random.Next(0,101)));
-        //}
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    datas.Add(new Data(random.Next(0,101), random.Next(0,101)));
+    //}
 
-        //datas.Sort();
+    //datas.Sort();
 
-        //for (int i = 0;i < 10; i++)
-        //{
-        //    Console.WriteLine(datas[i].a);
-        //}
+    //for (int i = 0;i < 10; i++)
+    //{
+    //    Console.WriteLine(datas[i].a);
+    //}
     //}
 
     class Data : IComparable<Data>
     {
         public Data(int _a, int _b)
         {
-            a = _a; 
+            a = _a;
             b = _b;
         }
         public int a;

@@ -2,8 +2,8 @@
 {
     public Component()
     {
-        gameObject = null;
-        transform = null;
+        //gameObject = null;
+        //transform = null;
     }
 
     ~Component()

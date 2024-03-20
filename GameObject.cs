@@ -25,9 +25,9 @@ class GameObject
         //layerOrder = 0;
     }
 
-    int findIndex = -1;
-    public T GetComponent<T>() where T : Component
+    public T? GetComponent<T>() where T : Component
     {
+        int findIndex = -1;
         for (int i = 0; i < components.Count; i++)
         {
             if (components[i] is T)
@@ -37,7 +37,7 @@ class GameObject
             }
         }
 
-        if(findIndex > 0)
+        if (findIndex > 0)
         {
             return (T)components[findIndex];
         }
@@ -48,12 +48,14 @@ class GameObject
 
     }
 
-    public void AddComponent<T>() where T : Component, new() // new가 없으면 생성되지않도록
+    public T AddComponent<T>() where T : Component, new() // new가 없으면 생성되지않도록
     {
         T newT = new T();
         newT.gameObject = this;
         newT.transform = transform;
         components.Add(newT);
+
+        return newT;
     }
 
     //public void RemoveComponent<T>() where T : Component
