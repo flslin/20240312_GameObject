@@ -17,7 +17,6 @@ class PlayerController : Component
         int oldY = transform.y;
         if (Input.GetButton("Up"))
         {
-
             transform.Translate(0, -1);
         }
         if (Input.GetButton("Left"))
@@ -60,7 +59,25 @@ class PlayerController : Component
                     transform.y = oldY;
                     break;
                 }
+
+                if (find.Check(gameObject) && find.isTrigger == true)
+                {
+                    OnTrigger(findGameObjcet);
+                }
             }
+        }
+    }
+
+    public void OnTrigger(GameObject other)
+    {
+        if(other.name == "Monster")
+        {
+            Engine.GetInstance().Find("GameManager").GetComponent<GameManager>().isGameOver = true;
+        }
+
+        else if (other.name == "Goal")
+        {
+            Engine.GetInstance().Find("GameManager").GetComponent<GameManager>().isNextStage = true;
         }
     }
 }
