@@ -1,4 +1,4 @@
-﻿
+﻿using SDL2;
 class PlayerController : Component
 {
     public override void Start() // 자식이 재정의 할수도 있음을 표시
@@ -15,27 +15,27 @@ class PlayerController : Component
 
         int oldX = transform.x;
         int oldY = transform.y;
-        if (Input.GetButton("Up"))
+        if (Input.GetKey(SDL.SDL_Keycode.SDLK_w))
         {
             transform.Translate(0, -1);
         }
-        if (Input.GetButton("Left"))
+        if (Input.GetKey(SDL.SDL_Keycode.SDLK_a))
         {
             transform.Translate(-1, 0);
         }
-        if (Input.GetButton("Down"))
+        if (Input.GetKey(SDL.SDL_Keycode.SDLK_s))
         {
             transform.Translate(0, 1);
         }
-        if (Input.GetButton("Right"))
+        if (Input.GetKey(SDL.SDL_Keycode.SDLK_d))
         {
             transform.Translate(1, 0);
         }
-        if (Input.GetButton("Quit"))
+        if (Input.GetKey(SDL.SDL_Keycode.SDLK_ESCAPE))
         {
             // singleton pattern : 오브젝트가 엔진꺼 써야할 필요가 있을 때 씀
             Engine.GetInstance().Stop();
-        }
+        } // 2024.03.25 키 입력시스템 변경
 
         transform.x = Math.Clamp(transform.x, 0, 80);
         transform.y = Math.Clamp(transform.y, 0, 80);

@@ -1,8 +1,11 @@
 ﻿class AIController : Component
 {
+    protected ulong processTime;
+    protected ulong elaspedTime;
     public AIController()
     {
-
+        processTime = 500;
+        elaspedTime = 0;
     }
 
     public override void Update()
@@ -12,7 +15,15 @@
             return;
         }
 
+        elaspedTime += Engine.GetInstance().deltaTime;
+        if (elaspedTime < processTime)
+        {
+            return;
+        }
+        elaspedTime = 0;
+
         Random random = new Random();
+        Engine engine = new Engine();
         int oldX = transform.x;
         int oldY = transform.y;
 
@@ -27,6 +38,7 @@
         }
         if (nextDirction == 2)
         {
+
             transform.Translate(0, 1);
         }
         if (nextDirction == 3)
@@ -63,6 +75,7 @@
                     transform.y = oldY;
                     break;
                 }
+
             }
         }
     }

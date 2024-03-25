@@ -1,9 +1,10 @@
 ﻿
+using SDL2;
 using System;
 
 class Engine
 {
-    protected Engine()
+    public Engine()
     {
         gameObjects = new List<GameObject>();
         isRunning = true;
@@ -32,6 +33,13 @@ class Engine
     public bool isNextLoading = false;
     public string nextSceneName = string.Empty;
 
+    public IntPtr myWindow;
+    public IntPtr myRenderer;
+    public SDL.SDL_Event myEvent;
+
+    public ulong deltaTime;
+    protected ulong lastTime;
+
     public void NextLevel(string _nextSceneName)
     {
         isNextLoading = true;
@@ -45,7 +53,20 @@ class Engine
 
     public void Init()
     {
+        if (SDL.SDL_Init(SDL.SDL_INIT_EVERYTHING) < 0) // 전부 초기화
+        {
+            Console.WriteLine("Init fail");
+            return;
+        }
+
+        myWindow = SDL.SDL_CreateWindow("2D Engine", 100, 100, 640, 480, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN); // "타이틀", 위치, 위치, 크기, 크기, 화면에 그리게함
+
+        myRenderer = SDL.SDL_CreateRenderer(myWindow, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC | SDL.SDL_RendererFlags.SDL_RENDERER_TARGETTEXTURE); // 화면에 그릴 붓 만들기? 그래픽 카드 기능들 PRESENTVSYNC 모니터 주파수 맞추기
+        // 2024.03.25 추가
+
         Input.Init();
+
+        lastTime = SDL.SDL_GetTicks64();
     }
 
     public void Stop()
@@ -227,6 +248,7 @@ class Engine
     {
         while (isRunning)
         {
+
             ProcessInput();
             Update();
             Render();
@@ -237,12 +259,17 @@ class Engine
                 isNextLoading = false;
                 nextSceneName = string.Empty;
             }
+            //ulong lastTime = SDL.SDL_GetTicks64();
         } // 1frame
     }
 
     public void Term()
     {
         gameObjects.Clear();
+
+        SDL.SDL_DestroyRenderer(myRenderer);
+        SDL.SDL_DestroyWindow(myWindow);
+        SDL.SDL_Quit();
     }
 
     public T Instantiate<T>() where T : GameObject, new() // T에 들어갈수 있는 걸 정의
@@ -262,11 +289,14 @@ class Engine
 
     protected void ProcessInput()
     {
-        Input.keyInfo = Console.ReadKey();
+        SDL.SDL_PollEvent(out myEvent); // 2024.03.25 추가
+        //Input.keyInfo = Console.ReadKey();
     }
 
     protected void Update()
     {
+        deltaTime = SDL.SDL_GetTicks64() - lastTime;
+        //Console.WriteLine(deltaTime);
         foreach (GameObject gameObject in gameObjects)
         {
             foreach (Component component in gameObject.components)
@@ -274,6 +304,7 @@ class Engine
                 component.Update(); // 컴포넌트 중 어떤 업데이트가 먼저 실행되는지 알 수 없음
             }
         }
+        lastTime = SDL.SDL_GetTicks64();
 
         //foreach (GameObject gameObject in gameObjects)
         //{
@@ -288,7 +319,7 @@ class Engine
         //{
         //    gameObjects[i].Render();
         //}
-        Console.Clear();
+        //Console.Clear();
         foreach (GameObject gameObject in gameObjects)
         {
             Renderer? renderer = gameObject.GetComponent<Renderer>();
@@ -297,6 +328,8 @@ class Engine
                 renderer.Render();
             }
         }
+
+        SDL.SDL_RenderPresent(Engine.GetInstance().myRenderer); // 2024.03.25 색깔 그리기
     }
 
     public GameObject Find(string name)
