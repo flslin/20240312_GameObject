@@ -69,6 +69,17 @@ class Engine
         lastTime = SDL.SDL_GetTicks64();
     }
 
+    public void Start()
+    {
+        foreach (GameObject gameObject in gameObjects)
+        {
+            foreach (Component component in gameObject.components)
+            {
+                component.Start(); // 컴포넌트 중 어떤 업데이트가 먼저 실행되는지 알 수 없음
+            }
+        }
+    }
+
     public void Stop()
     {
         isRunning = false;
@@ -375,9 +386,14 @@ class Engine
 
     public void Run()
     {
+        bool isFirst = true;
         while (isRunning)
         {
-
+            if(isFirst)
+            {
+                StartInAllComponents();
+                isFirst = false;
+            }
             ProcessInput();
             Update();
             Render();
@@ -390,6 +406,17 @@ class Engine
             }
             //ulong lastTime = SDL.SDL_GetTicks64();
         } // 1frame
+    }
+
+    private void StartInAllComponents()
+    {
+        foreach (GameObject gameObject in gameObjects)
+        {
+            foreach (Component component in gameObject.components)
+            {
+                component.Start(); // 컴포넌트 중 어떤 업데이트가 먼저 실행되는지 알 수 없음
+            }
+        }
     }
 
     public void Term()

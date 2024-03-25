@@ -20,7 +20,9 @@ class SpriteRenderer : Renderer
 
     public int spriteCount = 0;
 
-    protected int currentIndex = 0;
+    protected int currentXIndex = 0;
+
+    public int currentYIndex = 0;
 
     public ulong currentTime = 0;
 
@@ -35,6 +37,9 @@ class SpriteRenderer : Renderer
         colorKey.b = 255;
         colorKey.a = 255;
     }
+
+
+
     public void Load(string _textureName)
     {
         textureName = _textureName;
@@ -52,8 +57,8 @@ class SpriteRenderer : Renderer
             currentTime += Engine.GetInstance().deltaTime;
             if (currentTime >= executeTime)
             {
-                currentIndex++;
-                currentIndex = currentIndex % spriteCount; // 5로나눈 나머지로 넣음
+                currentXIndex++;
+                currentXIndex = currentXIndex % spriteCount; // 5로나눈 나머지로 넣음
                 currentTime = 0;
             }
         }
@@ -118,8 +123,8 @@ class SpriteRenderer : Renderer
                 // animation
                 int spriteWidth = rect.w / spriteCount;
                 int spriteHeight = rect.h / spriteCount;
-                rect.x = spriteWidth * currentIndex;
-                rect.y = 0;
+                rect.x = spriteWidth * currentXIndex;
+                rect.y = spriteHeight * currentYIndex;
                 rect.w = spriteWidth;
                 rect.h = spriteHeight;
             }

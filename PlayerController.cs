@@ -1,9 +1,10 @@
 ﻿using SDL2;
 class PlayerController : Component
 {
+    public SpriteRenderer spriteRenderer;
     public override void Start() // 자식이 재정의 할수도 있음을 표시
     {
-
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     public override void Update()
@@ -17,18 +18,22 @@ class PlayerController : Component
         int oldY = transform.y;
         if (Input.GetKey(SDL.SDL_Keycode.SDLK_w))
         {
+            spriteRenderer.currentYIndex = 2;
             transform.Translate(0, -1);
         }
         if (Input.GetKey(SDL.SDL_Keycode.SDLK_a))
         {
+            spriteRenderer.currentYIndex = 0;
             transform.Translate(-1, 0);
         }
         if (Input.GetKey(SDL.SDL_Keycode.SDLK_s))
         {
+            spriteRenderer.currentYIndex = 3;
             transform.Translate(0, 1);
         }
         if (Input.GetKey(SDL.SDL_Keycode.SDLK_d))
         {
+            spriteRenderer.currentYIndex = 1;
             transform.Translate(1, 0);
         }
         if (Input.GetKey(SDL.SDL_Keycode.SDLK_ESCAPE))
