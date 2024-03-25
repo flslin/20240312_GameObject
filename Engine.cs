@@ -403,6 +403,7 @@ class Engine
                 LoadScene(nextSceneName);
                 isNextLoading = false;
                 nextSceneName = string.Empty;
+                isFirst = true;
             }
             //ulong lastTime = SDL.SDL_GetTicks64();
         } // 1frame
