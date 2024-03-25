@@ -52,7 +52,7 @@ class PlayerController : Component
             Collider2D find = findGameObjcet.GetComponent<Collider2D>();
             if ( find != null)
             {
-                if(find.Check(gameObject))
+                if(find.Check(gameObject) && find.isTrigger == false)
                 {
                     // 충돌
                     transform.x = oldX;

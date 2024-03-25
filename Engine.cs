@@ -100,9 +100,127 @@ class Engine
 
         GameObject newGameObject;
 
-        for (int y = 0; y < 10/*map.Length*/; ++y)
+        //for (int y = 0; y < 10/*map.Length*/; ++y)
+        //{
+        //    for (int x = 0; x < 10/*map[y].Length*/; ++x)
+        //    {
+        //        if (map[y][x] == '*')
+        //        {
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Wall";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = '*';
+        //            renderer.Load("wall.bmp");
+        //            renderer.renderOrder = RenderOrder.Wall;
+        //            newGameObject.AddComponent<Collider2D>();
+
+
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Floor";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.renderOrder = RenderOrder.Floor;
+
+        //            //Instantiate(new Wall(x, y));
+        //            //Instantiate(new Floor(x, y)); // 2024.03.18 변경
+
+        //            //newGameObject.x = x; // 생성자 오버로드를 사용하면 필요없음
+        //            //newGameObject.y = y;
+        //        }
+        //        else if (map[y][x] == ' ')
+        //        {
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Floor";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = ' ';
+        //            renderer.Load("floor.bmp");
+        //            renderer.renderOrder = RenderOrder.Floor;
+
+        //            //newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
+        //            //Instantiate(new Floor(x, y));
+        //        }
+        //        else if (map[y][x] == 'P')
+        //        {
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Player";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = 'P';
+        //            renderer.Load("test.bmp");
+        //            renderer.renderOrder = RenderOrder.Player;
+        //            newGameObject.AddComponent<PlayerController>();
+        //            Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
+        //            collider2D.isTrigger = true;
+
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Floor";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = ' ';
+        //            renderer.Load("floor.bmp");
+        //            renderer.renderOrder = RenderOrder.Floor;
+        //        }
+        //        else if (map[y][x] == 'G')
+        //        {
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Goal";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.renderOrder = RenderOrder.Goal;
+        //            renderer.shape = 'G';
+        //            renderer.Load("coin.bmp");
+        //            Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
+        //            collider2D.isTrigger = true;
+
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Floor";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = ' ';
+        //            renderer.Load("floor.bmp");
+        //            renderer.renderOrder = RenderOrder.Floor;
+
+        //        }
+        //        else if (map[y][x] == 'M')
+        //        {
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Monster";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.renderOrder = RenderOrder.Monster;
+        //            renderer.shape = 'M';
+        //            renderer.Load("Slime.bmp");
+        //            Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
+        //            collider2D.isTrigger = true;
+        //            newGameObject.AddComponent<AIController>();
+
+        //            newGameObject = Instantiate<GameObject>();
+        //            newGameObject.name = "Floor";
+        //            newGameObject.transform.x = x;
+        //            newGameObject.transform.y = y;
+        //            renderer = newGameObject.AddComponent<SpriteRenderer>();
+        //            renderer.shape = ' ';
+        //            renderer.Load("floor.bmp");
+        //            renderer.renderOrder = RenderOrder.Floor;
+
+
+        //        }
+        //    }
+        //}
+
+        for (int y = 0; y < map.Length; ++y)
         {
-            for (int x = 0; x < 10/*map[y].Length*/; ++x)
+            for (int x = 0; x < map[y].Length; ++x)
             {
                 if (map[y][x] == '*')
                 {
@@ -112,22 +230,20 @@ class Engine
                     newGameObject.transform.y = y;
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = '*';
+                    renderer.Load("wall.bmp");
                     renderer.renderOrder = RenderOrder.Wall;
                     newGameObject.AddComponent<Collider2D>();
-
 
                     newGameObject = Instantiate<GameObject>();
                     newGameObject.name = "Floor";
                     newGameObject.transform.x = x;
                     newGameObject.transform.y = y;
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
+                    renderer.shape = ' ';
+                    renderer.Load("floor.bmp");
+
                     renderer.renderOrder = RenderOrder.Floor;
 
-                    //Instantiate(new Wall(x, y));
-                    //Instantiate(new Floor(x, y)); // 2024.03.18 변경
-
-                    //newGameObject.x = x; // 생성자 오버로드를 사용하면 필요없음
-                    //newGameObject.y = y;
                 }
                 else if (map[y][x] == ' ')
                 {
@@ -137,10 +253,10 @@ class Engine
                     newGameObject.transform.y = y;
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = ' ';
+                    renderer.Load("floor.bmp");
+
                     renderer.renderOrder = RenderOrder.Floor;
 
-                    //newGameObject.GetComponent<SpriteRenderer>().shape = ' ';
-                    //Instantiate(new Floor(x, y));
                 }
                 else if (map[y][x] == 'P')
                 {
@@ -150,6 +266,11 @@ class Engine
                     newGameObject.transform.y = y;
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = 'P';
+                    renderer.colorKey.g = 0;
+                    renderer.Load("test.bmp");
+                    renderer.isMultiple = true;
+                    renderer.spriteCount = 5;
+
                     renderer.renderOrder = RenderOrder.Player;
                     newGameObject.AddComponent<PlayerController>();
                     Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
@@ -161,6 +282,8 @@ class Engine
                     newGameObject.transform.y = y;
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = ' ';
+                    renderer.Load("floor.bmp");
+
                     renderer.renderOrder = RenderOrder.Floor;
                 }
                 else if (map[y][x] == 'G')
@@ -172,6 +295,8 @@ class Engine
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.renderOrder = RenderOrder.Goal;
                     renderer.shape = 'G';
+                    renderer.Load("coin.bmp");
+
                     Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
                     collider2D.isTrigger = true;
 
@@ -181,9 +306,11 @@ class Engine
                     newGameObject.transform.y = y;
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = ' ';
-                    renderer.renderOrder = RenderOrder.Floor;
+                    renderer.Load("floor.bmp");
 
+                    renderer.renderOrder = RenderOrder.Floor;
                 }
+
                 else if (map[y][x] == 'M')
                 {
                     newGameObject = Instantiate<GameObject>();
@@ -193,6 +320,8 @@ class Engine
                     SpriteRenderer renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.renderOrder = RenderOrder.Monster;
                     renderer.shape = 'M';
+                    renderer.Load("slime.bmp");
+
                     Collider2D collider2D = newGameObject.AddComponent<Collider2D>();
                     collider2D.isTrigger = true;
                     newGameObject.AddComponent<AIController>();
@@ -203,9 +332,9 @@ class Engine
                     newGameObject.transform.y = y;
                     renderer = newGameObject.AddComponent<SpriteRenderer>();
                     renderer.shape = ' ';
+                    renderer.Load("floor.bmp");
+
                     renderer.renderOrder = RenderOrder.Floor;
-
-
                 }
             }
         }
